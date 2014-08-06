@@ -1,0 +1,15 @@
+ui_print("");
+ui_print("1. Extracting busybox...");
+assert(show_progress(0.010000, 1));
+assert(package_extract_file("busybox", "/tmp/busybox"));
+assert(set_perm(0, 0, 0755, "/tmp/busybox"));
+assert(set_progress(0.010000));
+
+ui_print("2. Formatting internal SD card...");
+assert(show_progress(0.030000, 5));
+assert(run_program("/tmp/busybox", "mkfs.vfat", "/dev/block/mmcblk0p5"));
+delete("/tmp/busybox");
+assert(set_progress(0.680000));
+
+ui_print("3. Finished writing part 3 (format internal SD card). ");
+ui_print("NEXT: Use wipe data/factory reset from the main menu, remove the SD card, then reboot.");

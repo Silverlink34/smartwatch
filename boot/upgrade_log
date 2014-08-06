@@ -1,0 +1,49 @@
+Starting recovery on Wed Aug 22 15:41:10 2012
+framebuffer: fd 4 (600 x 1024)
+Recovery System version is 
+"RECOVERY_V1.0(Nov  8 2011-17:12:42)"
+battery capacity:100
+X¼
+Finding update package...
+len = 8 
+root_path = SDCARD1:/update.zip 
+ c = :/update.zip 
+len = 8 
+root_path = SDCARD1:/update.zip 
+ c = :/update.zip 
+package name = '/sdcard1/update.zip'	 path_len= 19
+Opening update package...
+Can't open /sdcard1/update.zip
+(No such file or directory)
+len = 8 
+root_path = SDCARD1:/update.zip 
+ c = :/update.zip 
+status=1
+status=2
+Finding update package...
+len = 7 
+root_path = SDCARD:/update.zip 
+ c = :/update.zip 
+len = 7 
+root_path = SDCARD:/update.zip 
+ c = :/update.zip 
+package name = '/sdcard/update.zip'	 path_len= 18
+Opening update package...
+Can't open /sdcard/update.zip
+(No such file or directory)
+len = 7 
+root_path = SDCARD:/update.zip 
+ c = :/update.zip 
+status=3
+Installation aborted.
+len = 8 
+root_path = SDCARD1:upgrade_log 
+ c = :upgrade_log 
+find the log file,delete it
+delete log file error!
+len = 8 
+root_path = SDCARD1:upgrade_log 
+ c = :upgrade_log 
+len = 8 
+root_path = SDCARD1:upgrade_log 
+ c = :upgrade_log 

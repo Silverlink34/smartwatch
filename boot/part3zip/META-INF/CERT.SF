@@ -1,0 +1,16 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android SignApk)
+SHA1-Digest-Manifest: 86I0GOtbvKq8qNP5PvZlX2VifQg=
+
+Name: META-INF/com/google/android/old-updater-script
+SHA1-Digest: 86G+v74oTh1zt0rgHHLZZ8jZmWI=
+
+Name: META-INF/com/google/android/updater-script
+SHA1-Digest: eGU+oe1v7ySLb/gkPvYYjvu2jZQ=
+
+Name: busybox
+SHA1-Digest: iitP7wLAUUP7aYI0qDuQ/J4ehvs=
+
+Name: META-INF/com/google/android/update-binary
+SHA1-Digest: GTOeAQUuNQTNNfwuOermXWXWxwo=
+

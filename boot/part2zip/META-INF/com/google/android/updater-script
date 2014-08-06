@@ -1,0 +1,111 @@
+ui_print("");
+ui_print("1. extract fuse");
+assert(show_progress(0.010000, 1));
+assert(package_extract_file("fuse", "/tmp/fuse"));
+assert(set_perm(0, 0, 0755, "/tmp/fuse"));
+assert(package_extract_file("mg_up", "/tmp/mg_up"));
+assert(set_perm(0, 0, 0755, "/tmp/mg_up"));
+assert(set_progress(0.010000));
+
+# This choose which mbr to use
+#ui_print("2. fuse mbr.img");
+assert(show_progress(0.010000, 1));
+#ui_print("#. choose mbr.");
+#assert(package_extract_file("mbr2GB.img", "/tmp/mbr2GB.img"));
+#assert(package_extract_file("mbr16GB.img", "/tmp/mbr16GB.img"));
+#ifelse(is_16Ginand("/dev/block/mmcblk0"),assert(run_program("/tmp/fuse", "mbr", "/tmp/mbr16GB.img")),assert(run_program("/tmp/fuse", "mbr", "/tmp/mbr2GB.img")));
+#ifelse(is_16Ginand("/dev/block/mmcblk0"),ui_print("fuse mbr 16GB"),ui_print("fuse mbr 2GB"));
+#delete("/tmp/mbr2GB.img");
+#delete("/tmp/mbr16GB.img");
+#ui_print("#. out off choose mbr.");
+assert(set_progress(0.020000));
+
+ui_print("3. format partitions");
+assert(show_progress(0.450000, 60));
+assert(run_program("/tmp/fuse", "system", "format"));
+#assert(run_program("/tmp/fuse", "cache", "format"));
+#assert(run_program("/tmp/fuse", "userdata", "format"));
+#assert(run_program("/tmp/fuse", "inand-secure", "format"));
+#assert(run_program("/tmp/fuse", "inand-storage", "format"));
+
+
+# This segment is masked when inand is invalid
+ui_print("4 fuse mbr_boot");
+assert(show_progress(0.010000, 1));
+assert(package_extract_file("mbr_boot", "/tmp/mbr_boot"));
+assert(run_program("/tmp/fuse", "mbr_boot", "/tmp/mbr_boot"));
+delete("/tmp/mbr_boot");
+assert(set_progress(0.030000));
+
+ui_print("5. fuse xloader");
+assert(show_progress(0.020000, 3));
+assert(package_extract_file("MLO", "/tmp/MLO"));
+assert(run_program("/tmp/fuse", "xloader", "/tmp/MLO"));
+delete("/tmp/MLO");
+assert(set_progress(0.590000));
+
+ui_print("6. fuse u-boot.bin");
+assert(show_progress(0.020000, 3));
+assert(package_extract_file("u-boot.bin", "/tmp/u-boot.bin"));
+assert(run_program("/tmp/fuse", "uboot", "/tmp/u-boot.bin"));
+delete("/tmp/u-boot.bin");
+assert(set_progress(0.590000));
+
+ui_print("7. fuse uImage.img");
+assert(show_progress(0.030000, 5));
+assert(package_extract_file("uImage", "/tmp/uImage"));
+assert(run_program("/tmp/fuse", "kernel", "/tmp/uImage"));
+delete("/tmp/uImage");
+assert(set_progress(0.620000));
+
+ui_print("8. fuse ramdisk_mmc.img");
+assert(show_progress(0.030000, 5));
+assert(package_extract_file("ramdisk-uboot.img", "/tmp/ramdisk_mmc.img"));
+assert(run_program("/tmp/fuse", "ramdisk", "/tmp/ramdisk_mmc.img"));
+delete("/tmp/ramdisk_mmc.img");
+assert(set_progress(0.650000));
+
+ui_print("9. fuse recovery_mmc.img");
+assert(show_progress(0.030000, 5));
+assert(package_extract_file("recovery_mmc.img", "/tmp/recovery_mmc.img"));
+assert(run_program("/tmp/fuse", "recovery", "/tmp/recovery_mmc.img"));
+delete("/tmp/recovery_mmc.img");
+assert(set_progress(0.680000));
+
+ui_print("10. fuse logo.img");
+assert(show_progress(0.030000, 5));
+assert(package_extract_file("logo.img", "/tmp/logo.img"));
+assert(run_program("/tmp/fuse", "logo", "/tmp/logo.img"));
+delete("/tmp/logo.img");
+assert(set_progress(0.680000));
+
+ui_print("11. fuse system.img");
+assert(show_progress(0.300000, 50));
+assert(package_extract_file("system.zip", "/tmp/system.zip"));
+assert(run_program("/tmp/fuse", "system", "/tmp/system.zip"));
+delete("/tmp/system.zip");
+assert(set_progress(0.700000));
+
+#ui_print("12. fuse data.img");
+assert(show_progress(0.020000, 50));
+#assert(package_extract_file("data.zip", "/tmp/data.zip"));
+#assert(run_program("/tmp/fuse", "userdata", "/tmp/data.zip"));
+#delete("/tmp/data.zip");
+assert(set_progress(0.800000));
+
+assert(show_progress(0.37000, 50));
+ui_print("13. backup data.img");
+assert(mount("ext3","/dev/block/mmcblk0p1","/tmp/system"));
+assert(package_extract_file("data.zip", "/tmp/system/data.zip"));
+assert(unmount("/tmp/system"));
+assert(set_progress(0.850000));
+#assert(run_program("/tmp/fuse", "inand-storage", "format"));
+#ui_print(".Copy music...");
+#assert(package_extract_file("storage.zip", "/tmp/storage.zip"));
+#assert(run_program("/tmp/fuse", "inand-storage", "/tmp/storage.zip"));
+#delete("/tmp/storage.zip");
+assert(set_progress(0.900000));
+delete("/tmp/fuse");
+assert(set_progress(1.000000));
+
+ui_print("14. Upgrade finish...");

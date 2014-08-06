@@ -1,0 +1,15 @@
+ui_print("");
+ui_print("1. Extracting restore image...");
+assert(show_progress(0.010000, 1));
+assert(package_extract_file("restore.img", "/tmp/restore.img"));
+assert(set_progress(0.010000));
+
+ui_print("2. Writing restore image...");
+assert(show_progress(0.030000, 5));
+assert(run_program("/sbin/dd", "if=/tmp/restore.img", "of=/dev/block/mmcblk0","bs=1048576"));
+assert(run_program("/sbin/sync"));
+delete("/tmp/restore.img");
+assert(set_progress(0.680000));
+
+ui_print("3. Finished writing part 1 (hidden partition restore). ");
+ui_print("NEXT: Power down, power on into recovery again, and flash part2.zip then part3.zip.");

@@ -1,0 +1,6 @@
+ui_print("");
+ui_print("Formatting internal SD card...");
+assert(run_program("/sbin/busybox", "mkfs.vfat", "/dev/block/mmcblk0p5"));
+assert(run_program("/sbin/sync"));
+ui_print("3. Finished writing part 3 (format internal SD card). ");
+ui_print("NEXT: Go back to the main menu, use Wipe Data/Factory reset. Then reboot. ");
