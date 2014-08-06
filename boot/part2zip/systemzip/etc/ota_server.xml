@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<indigo> <OTAServer>
+<httpServer>http://download.lenovo.com/slates/a1/ICS_OTA/</httpServer>
+<ftpServer>lenovo.download.akamai.com</ftpServer>
+<ImageSubDir>/slates/a1/ICS_OTA</ImageSubDir>
+<BattSubDir>tablet1/Batt/</BattSubDir>
+<username>slatesftp</username>
+<password>sprt!42tes</password>
+<port>21</port>
+<BuildNumber>ThinkTablet_A310_03_21_36_US</BuildNumber>
+</OTAServer> </indigo>

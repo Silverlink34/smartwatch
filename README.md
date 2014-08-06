@@ -52,3 +52,8 @@ Main Display - top of screen from left to right
 Plugging in usb
   
   Smartwatch displays either usb storage or COM Port.
+  
+  
+  
+Download the entire boot directory (unmodified and unzipped) here:
+
